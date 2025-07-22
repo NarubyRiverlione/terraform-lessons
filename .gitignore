@@ -1,0 +1,11 @@
+# Ignore service principal credential files
+auth/servicePrinipal/client.key
+auth/servicePrinipal/client.pfx
+auth/servicePrinipal/client.crt
+# Ignore any PEM files
+auth/servicePrinipal/*.pem
+
+# Terraform local state and plugin directories
+*.tfstate
+*.tfstate.*
+**/.terraform/

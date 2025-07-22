@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Prevent pushes if any commit contains private keys or hard-coded secrets
+set -e
+
+# Read refs from stdin: <local_ref> <local_sha> <remote_ref> <remote_sha>
+while read local_ref local_sha remote_ref remote_sha; do
+  # List new commits that are about to be pushed
+  if [[ "$remote_sha" =~ ^0+$ ]]; then
+    # Initial push: scan all local commits
+    commits=$(git rev-list "$local_sha")
+  else
+    # Subsequent push: scan commits between remote and local
+    commits=$(git rev-list "$remote_sha..$local_sha")
+  fi
+
+  if [[ -n "$commits" ]]; then
+    for sha in $commits; do
+      # Scan each commit for secret patterns
+      if git grep -I -q -E "-----BEGIN.*KEY-----|pass:|PASSWORD=|client_secret" "$sha"; then
+        echo "⛔ Secrets detected in commit $sha. Push aborted."
+        exit 1
+      fi
+    done
+  fi
+done
+
+exit 0
