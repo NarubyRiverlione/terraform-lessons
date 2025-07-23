@@ -9,7 +9,7 @@ terraform {
       version = "~> 3.0"
     }
   }
-  backend "remote" {
+  cloud {
     organization = "naruby-riverlione-org"
     workspaces {
       name = "Zero-module"
