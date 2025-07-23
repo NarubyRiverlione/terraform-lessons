@@ -125,8 +125,8 @@ $sp = Ensure-ServicePrincipal -AppId $AppId
 $roleDefinitionJson = @"
 {
   "properties": {
-    "roleName": "Resource Group Creator",
-    "description": "Allows creation and management of resource groups and role assignments.",
+    "roleName": "Terraform",
+    "description": "Resource Group creation + RBAC\nStorage account read",
     "assignableScopes": [
       "/subscriptions/$SubscriptionId"
     ],
@@ -139,7 +139,8 @@ $roleDefinitionJson = @"
           "Microsoft.Resources/subscriptions/read",
           "Microsoft.Authorization/roleAssignments/read",
           "Microsoft.Authorization/roleAssignments/write",
-          "Microsoft.Authorization/roleAssignments/delete"
+          "Microsoft.Authorization/roleAssignments/delete",
+          "Microsoft.Storage/storageAccounts/read"
         ],
         "notActions": [],
         "dataActions": [],
@@ -151,7 +152,7 @@ $roleDefinitionJson = @"
 "@
 
 $customRole = Ensure-CustomRole `
-    -RoleName "Resource Group Creator" `
+    -RoleName "Terraform" `
     -RoleDefinitionJson $roleDefinitionJson `
     -Scope $scope
 
