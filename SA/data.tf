@@ -1,6 +1,9 @@
 data "terraform_remote_state" "rg" {
-  backend = "local"
+  backend = "remote"
   config = {
-    path = "../RG/terraform.tfstate"
+    organization = "naruby-riverlione-org"
+    workspaces = {
+      name = "Zero-RG"
+    }
   }
 }

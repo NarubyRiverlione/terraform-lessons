@@ -5,6 +5,12 @@ terraform {
       version = "=4.1.0"
     }
   }
+    cloud {     
+    organization = "naruby-riverlione-org" 
+    workspaces { 
+      name = "Zero-RG" 
+    } 
+  } 
 }
 # create a resource group
 resource "azurerm_resource_group" "rg" {

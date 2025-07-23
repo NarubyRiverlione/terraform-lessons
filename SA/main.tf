@@ -9,6 +9,12 @@ terraform {
       version = "~> 3.0"
     }
   }
+      cloud {     
+    organization = "naruby-riverlione-org" 
+    workspaces { 
+      name = "Zero-SA" 
+    } 
+  } 
 }
 
 resource "random_string" "suffix" {
