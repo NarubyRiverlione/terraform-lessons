@@ -7,5 +7,6 @@ variable "environment" {
 variable "created_by" {
   description = "The entity that created the resources"
   type        = string
-  default     = "Terraform"
+  default     = "Terraform cloud"
 }
+
