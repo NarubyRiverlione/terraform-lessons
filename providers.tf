@@ -13,7 +13,7 @@ terraform {
     resource_group_name  = "Terraform-AzureDevops"
     storage_account_name = "terraformremotestate42"
     container_name       = "terraformstate-lessons"
-    key                  = "zero/state.tfstate"
+    key                  = "zero/terraform.tfstate"
   }
 }
 
