@@ -9,12 +9,12 @@ terraform {
       version = "~> 3.0"
     }
   }
-  backend "azurerm" {
-    resource_group_name  = "Terraform-AzureDevops"
-    storage_account_name = "terraformremotestate42"
-    container_name       = "terraformstate-lessons"
-    key                  = "zero/state.tfstate"
-  }
+  // backend "azurerm" {
+  //   resource_group_name  = "Terraform-AzureDevops"
+  //   storage_account_name = "terraformremotestate42"
+  //   container_name       = "terraformstate-lessons"
+  //   key                  = "zero/state.tfstate"
+  // }
 }
 
 provider "azurerm" {
