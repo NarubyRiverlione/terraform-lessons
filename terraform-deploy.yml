@@ -11,15 +11,28 @@ stages:
   - job: TerraformPlan
     displayName: 'Terraform Plan'
     steps:
-    - task: TerraformInstaller@0
+    - task: TerraformInstaller@1
+      displayName: 'Terraform Install'
       inputs:
         terraformVersion: 'latest'
+        
+    - task: TerraformTask@5
+      displayName: 'Terraform Init'
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Azure Resouce Manager - MI'
+        backendAzureRmStorageAccountName: 'terraformremotestate42'
+        backendAzureRmContainerName: 'terraformstate-lessons'
+        backendAzureRmKey: 'zero/terraform.tfstate'
+    - task: TerraformTask@5
+      displayName: 'Terraform Plan'
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        commandOptions: '-out=tfplan'
+        environmentServiceNameAzureRM: 'Azure Resouce Manager - MI'
 
-    - script: |
-        terraform --version
-        terraform init -backend-config="storage_account_name=$(storageAccountName)" -backend-config="container_name=$(containerName)" -backend-config="key=$(key)" -backend-config="access_key=$(accessKey)"
-        terraform plan -out=tfplan
-      displayName: 'Terraform Init and Plan'
 
 - stage: Deploy
   displayName: 'Terraform Apply'
@@ -27,12 +40,24 @@ stages:
   - job: TerraformApply
     displayName: 'Terraform Apply'
     steps:
-    - task: TerraformInstaller@0
+    - task: TerraformInstaller@1
+      displayName: 'Terraform Install'
       inputs:
         terraformVersion: 'latest'
+        
+    - task: TerraformTask@5
+      displayName: 'Terraform Init'
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Azure Resouce Manager - MI'
+        backendAzureRmStorageAccountName: 'terraformremotestate42'
+        backendAzureRmContainerName: 'terraformstate-lessons'
+        backendAzureRmKey: 'zero/terraform.tfstate'
 
-    - script: |
-        terraform --version
-        terraform init -backend-config="storage_account_name=$(storageAccountName)" -backend-config="container_name=$(containerName)" -backend-config="key=$(key)" -backend-config="access_key=$(accessKey)"
-        terraform apply -auto-approve tfplan
-      displayName: 'Terraform Init and Apply'
+    - task: TerraformTask@5
+      displayName: 'Terraform Apply'
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        environmentServiceNameAzureRM: 'Azure Resouce Manager - MI'
