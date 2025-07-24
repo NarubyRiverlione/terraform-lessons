@@ -15,7 +15,6 @@ terraform {
     container_name       = "terraformstate-lessons"
     key                  = "zero/state.tfstate"
   }
-  }
 }
 
 provider "azurerm" {
