@@ -7,7 +7,12 @@ resource "random_string" "suffix" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                          = "tfsa${random_string.suffix.result}-${var.environment}"
+  name                          = "tflearnsa${var.environment}${random_string.suffix.result}"
+
+  precondition {
+    condition     = length(self.name) >= 3 && length(self.name) <= 24 && length(regex("^[a-z0-9]+$", self.name)) == 1
+    error_message = "Storage account name must be 3–24 lowercase alphanumeric characters."
+  }
   resource_group_name           = var.resource_group_name
   location                      = var.resource_group_location
   account_tier                  = "Standard"
@@ -22,7 +27,7 @@ resource "azurerm_storage_account" "sa" {
 }
 
 resource "azurerm_storage_container" "container" {
-  name                  = "tfcontainer-${var.environment}"
+  name                  = "tflearncontainer-${var.environment}"
   storage_account_name  = azurerm_storage_account.sa.name
   container_access_type = "private"
 
