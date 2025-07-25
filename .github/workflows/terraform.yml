@@ -9,9 +9,9 @@
 name: 'Terraform-CHANGE-TO-ENVIRONMENT'
 
 on:
-  push:
-    branches: [ "CHANGE-TO-ENVIRONMENT" ]
-  pull_request:
+  # push:
+  #   branches: [ "CHANGE-TO-ENVIRONMENT" ]
+  # pull_request:
   workflow_dispatch:
   
 permissions:
