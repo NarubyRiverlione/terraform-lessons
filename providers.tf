@@ -14,7 +14,7 @@ terraform {
     organization = "naruby-riverlione-org"
     workspaces {
       # separate state for each environment
-      name = "Zero-module-${var.environment}"
+      name = "Zero-module-prod"
     }
   }
 }
