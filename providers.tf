@@ -9,11 +9,11 @@ terraform {
       version = "~> 3.0"
     }
   }
-  backend "azurerm" {
-    resource_group_name  = "Terraform-AzureDevops"
-    storage_account_name = "terraformremotestate42"
-    container_name       = "terraformstate-lessons"
-    key                  = "zero/terraform.tfstate"
+  cloud {
+    organization = "naruby-riverlione-org"
+    workspaces {
+      name = "Zero-module"
+    }
   }
 }
 
