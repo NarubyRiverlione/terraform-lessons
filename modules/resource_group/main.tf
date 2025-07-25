@@ -6,7 +6,6 @@ resource "azurerm_resource_group" "rg" {
   tags = {
     environment = var.environment
     created_by  = var.created_by
-    run_by      = "HCL Terraform Cloud"
   }
 }
 
