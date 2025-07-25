@@ -6,11 +6,11 @@
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 #
 
-name: 'Terraform-Dev'
+name: 'Terraform-ENVIRONMENT'
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "ENVIRONMENT" ]
   pull_request:
 
 permissions:
@@ -20,7 +20,7 @@ jobs:
   terraform:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ENVIRONMENT
     env:
       ARM_CLIENT_ID:       ${{ secrets.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET:   ${{ secrets.ARM_CLIENT_SECRET }}

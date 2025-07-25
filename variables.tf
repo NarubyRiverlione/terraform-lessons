@@ -1,7 +1,7 @@
 variable "environment" {
   description = "The environment for which the resources are being created (e.g., dev, prod)"
   type        = string
-  default     = "dev"
+  default     = ""  #  your actual environment name
 }
 
 variable "created_by" {
