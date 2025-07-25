@@ -6,11 +6,11 @@
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 #
 
-name: 'Terraform-CHANGE-TO-ENVIRONMENT'
+name: 'Terraform-dev'
 
 on:
   push:
-    branches: [ "CHANGE-TO-ENVIRONMENT" ]
+    branches: [ "dev" ]
   pull_request:
   workflow_dispatch:
   
@@ -21,7 +21,7 @@ jobs:
   terraform:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
-    environment: CHANGE-TO-ENVIRONMENT
+    environment: dev
     env:
       ARM_CLIENT_ID:       ${{ secrets.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET:   ${{ secrets.ARM_CLIENT_SECRET }}
