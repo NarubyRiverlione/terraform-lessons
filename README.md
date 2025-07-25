@@ -17,3 +17,4 @@ The main branch contain the start for making a new environment.
 Make sure to 
 - fill in the environment name in variables.tf 
 - update the terraform.yml in .github/workflows
+- update the workspace name in the cloud block in providers.tf
