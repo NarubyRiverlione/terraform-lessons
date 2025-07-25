@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "rg" {
-  name     = "terraform-learn"
+  name     = "terraform-learn-${var.environment}"
   location = "West Europe"
   tags = {
     environment = var.environment

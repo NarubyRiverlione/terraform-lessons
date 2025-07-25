@@ -7,7 +7,7 @@ resource "random_string" "suffix" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                          = "tfsa${random_string.suffix.result}"
+  name                          = "tfsa${random_string.suffix.result}-${var.environment}"
   resource_group_name           = var.resource_group_name
   location                      = var.resource_group_location
   account_tier                  = "Standard"
@@ -22,7 +22,7 @@ resource "azurerm_storage_account" "sa" {
 }
 
 resource "azurerm_storage_container" "container" {
-  name                  = "tfcontainer"
+  name                  = "tfcontainer-${var.environment}"
   storage_account_name  = azurerm_storage_account.sa.name
   container_access_type = "private"
 
