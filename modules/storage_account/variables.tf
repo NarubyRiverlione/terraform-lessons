@@ -1,6 +1,11 @@
 variable "environment" {
   description = "The environment for which the resources are being created (e.g., dev, prod)"
   type        = string
+
+  validation {
+    condition     = can(regex("^[a-z0-9]{1,7}$", var.environment))
+    error_message = "Environment must be 1–7 lowercase alphanumeric characters to ensure storage account name length ≤24."
+  }
 }
 
 variable "created_by" {

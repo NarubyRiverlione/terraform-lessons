@@ -7,12 +7,7 @@ resource "random_string" "suffix" {
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                          = "tflearnsa${var.environment}${random_string.suffix.result}"
-
-  precondition {
-    condition     = length(self.name) >= 3 && length(self.name) <= 24 && length(regex("^[a-z0-9]+$", self.name)) == 1
-    error_message = "Storage account name must be 3–24 lowercase alphanumeric characters."
-  }
+  name                          = "tflearnsa${var.environment}${random_string.suffix.result}"  
   resource_group_name           = var.resource_group_name
   location                      = var.resource_group_location
   account_tier                  = "Standard"
